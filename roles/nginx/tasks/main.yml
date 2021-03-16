@@ -1,0 +1,29 @@
+- name: 'Install nginx web server'
+  apt:
+    name: nginx
+    state: 'present'
+    update_cache: true
+  become: true
+
+- name: 'start nginx'
+  become: true
+  service:
+    name: nginx
+    state: started
+
+- name: 'Upload nginx virtual host config file'
+  copy:
+    src: '../templates/wordpress.conf'
+    dest: /etc/nginx/sites-available/wordpress.conf
+  become: true
+  
+- name: 'Create symlink'
+  file:
+    src: /etc/nginx/sites-available/wordpress.conf
+    dest: /etc/nginx/sites-enabled/wordpress.conf
+    state: link
+  become: true
+  
+  notify:
+    - 'restart nginx'
+  become: true

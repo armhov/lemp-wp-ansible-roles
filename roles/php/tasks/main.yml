@@ -1,0 +1,8 @@
+- name: 'Install PHP'
+  apt:
+    name:
+      - 'php-fpm'
+      - 'php-mysql'
+    state: 'present'
+    update_cache: true
+  become: true

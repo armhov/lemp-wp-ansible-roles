@@ -1,0 +1,10 @@
+---
+- hosts: webservers
+  remote_user: 'devops'
+  roles:
+    - nginx
+    - php
+    - mysql
+    - wordpress
+    
+ 

@@ -1,0 +1,24 @@
+- name: 'Install the required packages'
+  apt:
+    name:
+      - 'mysql-server'
+    state: 'present'
+    update_cache: true
+  become: true
+
+- name: 'Install python req for mysql module'
+  pip:
+    name: 'PyMySQL'
+    state: 'present'
+
+- name: 'Set mysql root password'
+  mysql_user:
+    login_host: 'localhost'
+    login_user: 'root'
+    login_password: 'RootPass1234!'
+    name: 'root'
+    password: 'RootPass1234!' 
+    state: present
+    check_implicit_admin: yes
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  become: yes

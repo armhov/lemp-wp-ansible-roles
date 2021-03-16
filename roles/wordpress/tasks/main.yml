@@ -1,0 +1,24 @@
+- name: 'Create databese for Wordpress'
+  mysql_db:
+    name: 'wordpress'
+    state: 'present'
+    login_user: 'root'
+    login_password: 'RootPass1234!'
+  become: yes
+
+- name: 'Create Wordpress DB user'
+  mysql_user:
+    name: 'wpuser'
+    password: 'wpuserpass123!'
+    update_password: 'on_create'
+    priv: "wordpress.*:ALL"
+    login_user: 'root'
+    login_password: 'RootPass1234!'
+    state: present
+  become: yes
+
+- name: 'Upload wp-config file into wordpress folder'
+  copy:
+    src: '../templates/wp-config.php'
+    dest: /var/www/html/wordpress/wp-config.php
+  become: true
