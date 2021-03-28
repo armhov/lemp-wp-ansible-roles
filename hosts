@@ -1,2 +1,2 @@
 [webservers]
-client01 ansible_host=10.0.2.6 ansible_sudo_pass=devops
+client01 ansible_host=52.15.137.57 ansible-user=ubuntu ansible_ssh_private_key_file=/home/armen/.ssh/aws-demo.pem

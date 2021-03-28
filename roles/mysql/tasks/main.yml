@@ -6,7 +6,16 @@
     update_cache: true
   become: true
 
+- name: 'Install pip3'
+  apt:
+    name:
+      - 'python3-pip'
+    state: 'present'
+    update_cache: true
+  become: true
+
 - name: 'Install python req for mysql module'
+  become: true
   pip:
     name: 'PyMySQL'
     state: 'present'
